@@ -1,0 +1,21 @@
+import { NextResponse } from "next/server";
+
+export async function POST(req) {
+  try {
+    const { message, track, language } = await req.json();
+
+    // System prompt based on learning track
+    const systemInstruction = `You are Quick Kalaam AI, an expert Arabic & Quranic tutor. 
+    Current Track: ${track || 'Spoken Arabic'}. 
+    Respond in user's language: ${language || 'Hinglish/Urdu'}. 
+    Keep responses clear, concise, and focused on practical learning with correct pronunciation (Makhraj).`;
+
+    // Gemini API Request placeholder
+    return NextResponse.json({
+      success: true,
+      reply: `[Quick Kalaam AI - ${track}]: Aapne pucha: "${message}". Main aapki isme madad kar sakta hoon!`
+    });
+  } catch (error) {
+    return NextResponse.json({ error: "API processing failed" }, { status: 500 });
+  }
+}
